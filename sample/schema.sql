@@ -6,6 +6,22 @@
 
 
 --
+-- Table structure for table `monitoring_hosts`
+--
+
+DROP TABLE IF EXISTS `monitoring_hosts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `monitoring_hosts` (
+  `hostname` varchar(20) DEFAULT NULL,
+  `ip` varchar(15) DEFAULT NULL,
+  `time` datetime DEFAULT NULL,
+  PRIMARY KEY (`hostname`)  
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+--
 -- Table structure for table `monitoring`
 --
 
@@ -68,59 +84,27 @@ CREATE TABLE `monitoring_10min` (
   `didx` double DEFAULT NULL,
   `didx2` double DEFAULT NULL,
   `didx3` double DEFAULT NULL,
+  `sididx` double DEFAULT NULL,  
   PRIMARY KEY (`hostname`,`time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
 --
--- Table structure for table `monitoring_1hour`
+-- Table structure for table `monitoring_1hour` etc.
 --
 
 DROP TABLE IF EXISTS `monitoring_1hour`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `monitoring_1hour` (
-  `hostname` varchar(20) NOT NULL,
-  `time` datetime NOT NULL,
-  `temp` double DEFAULT NULL,
-  `temp2` double DEFAULT NULL,
-  `temp3` double DEFAULT NULL,
-  `humi` double DEFAULT NULL,
-  `humi2` double DEFAULT NULL,
-  `humi3` double DEFAULT NULL,
-  `dp` double DEFAULT NULL,
-  `dp2` double DEFAULT NULL,
-  `dp3` double DEFAULT NULL,
-  `pres` double DEFAULT NULL,
-  `bmptemp` double DEFAULT NULL,
-  `dietemp` double DEFAULT NULL,
-  `objtemp` double DEFAULT NULL,
-  `sitemp` double DEFAULT NULL,
-  `sihumi` double DEFAULT NULL,
-  `eco2` double DEFAULT NULL,
-  `tvoc` double DEFAULT NULL,
-  `lux` double DEFAULT NULL,
-  `didx` double DEFAULT NULL,
-  `didx2` double DEFAULT NULL,
-  `didx3` double DEFAULT NULL,
-  PRIMARY KEY (`hostname`,`time`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `monitoring_1hour` LIKE `monitoring_10min`;
 
+DROP TABLE IF EXISTS `monitoring_1day_min`;
+CREATE TABLE `monitoring_1day_min` LIKE `monitoring_10min`;
 
---
--- Table structure for table `monitoring_hosts`
---
+DROP TABLE IF EXISTS `monitoring_1day_max`;
+CREATE TABLE `monitoring_1day_max` LIKE `monitoring_10min`;
 
-DROP TABLE IF EXISTS `monitoring_hosts`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `monitoring_hosts` (
-  `hostname` varchar(20) DEFAULT NULL,
-  `ip` varchar(15) DEFAULT NULL,
-  `time` datetime DEFAULT NULL,
-  PRIMARY KEY (`hostname`)  
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `monitoring_1day_avg`;
+CREATE TABLE `monitoring_1day_avg` LIKE `monitoring_10min`;
 
+DROP TABLE IF EXISTS `monitoring_1day_stddev`;
+CREATE TABLE `monitoring_1day_stddev` LIKE `monitoring_10min`;

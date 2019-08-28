@@ -24,7 +24,7 @@ $time = htmlspecialchars($_GET["time"]);
 
 //取得したデータの一覧を作成
 $data = '';         // 初期化
-$keys = array("temp", "temp2", "temp3", "humi", "humi2", "humi3", "dp", "dp2", "dp3", "bmptemp", "dietemp", "lux", "objtemp", "pres"); //カラム名
+$keys = array("temp", "temp2", "temp3", "humi", "humi2", "humi3", "dp", "dp2", "dp3", "bmptemp", "dietemp", "lux", "objtemp", "pres", "sitemp", "sihumi", "eco2", "tvoc"); //カラム名
 //echo $keys;
 for ($i =0; $i < count($keys); $i++){
   //データをカンマ区切りで並べる. 
@@ -49,7 +49,7 @@ try{
   // データ入力
   $query = sprintf(
    'insert into %s (hostname,time,temp,temp2,temp3,humi,humi2,humi3,
-    dp,dp2,dp3,bmptemp,dietemp,lux,objtemp,pres) values( "%s","%s",%s )',
+    dp,dp2,dp3,bmptemp,dietemp,lux,objtemp,pres,sitemp,sihumi,eco2,tvoc) values( "%s","%s",%s )',
     $table,$host,$time,$data
   );
 
