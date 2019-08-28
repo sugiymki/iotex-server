@@ -23,21 +23,25 @@ $time = htmlspecialchars($_GET["time"]);
 
 
 //取得したデータの一覧を作成
-$data = '';         // 初期化
-$keys = array("temp", "temp2", "temp3", "humi", "humi2", "humi3", "dp", "dp2", "dp3", "bmptemp", "dietemp", "lux", "objtemp", "pres", "sitemp", "sihumi", "eco2", "tvoc"); //カラム名
+$data  = '';         // 初期化
+$data2 = '';         // 初期化
+$keys = array("temp","temp2","temp3","humi","humi2","humi3","dp","dp2","dp3","bmptemp","dietemp","lux","objtemp","pres","sitemp","sihumi","eco2","tvoc"); //カラム名
 //echo $keys;
 for ($i =0; $i < count($keys); $i++){
   //データをカンマ区切りで並べる. 
-  if (preg_match("/^[0-9]+/", $_GET[$keys[$i]])){
+  if (isset($_GET[$keys[$i]]) and (preg_match("/^[0-9]+/", $_GET[$keys[$i]]))){
     // 値があるときはそのまま
-    $data = $data.sprintf('%.2f',$_GET[$keys[$i]]);
+    $data  = $data.sprintf('%.2f',$_GET[$keys[$i]]);
+    $data2 = $data2.sprintf('%s=%.2f',$keys[$i],$_GET[$keys[$i]]);
   }else{
     // 値が無いときは null に. 
-   $data = $data."null";
+   $data  = $data."null";
+   $data2 = $data2.sprintf('%s=null',$keys[$i]);
   }
   // カンマ区切りを入れる
   if ($i != (count($keys)-1)){
-    $data = $data.",";
+    $data  = $data.",";
+    $data2 = $data2.",";
   }
 }
 
@@ -49,8 +53,8 @@ try{
   // データ入力
   $query = sprintf(
    'insert into %s (hostname,time,temp,temp2,temp3,humi,humi2,humi3,
-    dp,dp2,dp3,bmptemp,dietemp,lux,objtemp,pres,sitemp,sihumi,eco2,tvoc) values( "%s","%s",%s )',
-    $table,$host,$time,$data
+    dp,dp2,dp3,bmptemp,dietemp,lux,objtemp,pres,sitemp,sihumi,eco2,tvoc) values( "%s","%s",%s )  ON DUPLICATE KEY UPDATE %s',
+    $table,$host,$time,$data,$data2
   );
 
   echo $query;
