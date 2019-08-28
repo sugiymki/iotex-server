@@ -61,7 +61,7 @@ sql = "show columns from #{mytable_from}"
 client.query(sql).each do |item|
   if item["Field"] != "hostname" && item["Field"] != "time"
     columns1.push( item["Field"] )
-    columns2.push( "AVG(#{item["Field"]}) as #{item["Field"]}")
+    columns2.push( "AVG(#{item["Field"]}) as #{item["Field"]}") #SQL 用に整形
   end
 end
 
@@ -92,8 +92,8 @@ while ( time1 < time_end ) do
     # 平均値と, 10 分間に何回記録されているか, を調べる. 
     sql = "SELECT hostname, count(time) as count, #{columns2.join(',')}
            FROM #{mytable_from} 
-           WHERE time > '#{time0}' AND time <= '#{time1}' AND hostname LIKE '#{myhost}'
-           ORDER BY time"
+           WHERE time > '#{time0}' AND time <= '#{time1}' 
+           AND hostname LIKE '#{myhost}' ORDER BY time"
 
     # 変数初期化
     columns3 = Array.new
