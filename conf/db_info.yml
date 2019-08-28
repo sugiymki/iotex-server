@@ -1,0 +1,5 @@
+ADPT: "mysql2"
+SERV: "localhost"
+USER: "<username>"
+PASS: "<password>"
+DBNM: "j4db"
