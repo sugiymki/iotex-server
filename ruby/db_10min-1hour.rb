@@ -5,7 +5,6 @@
 # 
 # Author: SUGIYAMA Ko-ichiro
 #
-
 require 'yaml'
 require 'mysql2'
 require 'fileutils'
@@ -17,7 +16,7 @@ require 'active_support/time'
 
 # データベースへの接続情報の置き場.
 # ~/public_html 以下には置かないこと.
-conf = "/home/hogehoge/iotex-server/conf/db_info.yml"
+conf = "/home/sugiyama/iotex-server/conf/db_info.yml"
 
 # データベースのテーブル名
 mytable_from = "monitoring_10min"
@@ -39,7 +38,7 @@ client = Mysql2::Client.new(
 ###
 
 # 平均を開始する時間 (デフォルト値)
-time_from = DateTime.new( 2019, 8, 1, 0, 0, 0, "JST")
+time_from = DateTime.new( 2017, 1, 1, 0, 0, 0, "JST")
 
 # テーブルに既に値が入っている場合は平均開始時刻 time_from の値を更新する. 
 sql = "SELECT time FROM #{mytable_to} ORDER BY time DESC LIMIT 1"
@@ -49,11 +48,9 @@ client.query(sql).each do |item|
   end
 end
 
-
 ###
 ### 毎正時の値を抽出
 ###
-
 sql = "INSERT INTO #{mytable_to} 
        SELECT * FROM #{mytable_from} 
        WHERE TIME(time) LIKE '%00:00' AND time > '#{time_from.strftime('%Y-%m-%d %H:%M:%S')}' "

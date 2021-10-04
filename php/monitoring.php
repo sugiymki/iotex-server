@@ -1,12 +1,10 @@
 <?php
 /*
 表題: データベースにモニタリングの結果を入力するための PHP スクリプト
-履歴: 2018-09-12 杉山耕一朗
-      2018-11-20 杉山耕一朗
 */
 
 // 設定ファイル
-require_once("/home/hogehoge/iotex-server/conf/db_info.php");
+require_once("/home/sugiyama/iotex-server/conf/db_info.php");
 
 //変数初期化
 $table  = "monitoring";           //テーブル名
@@ -14,7 +12,7 @@ $table2 = "monitoring_hosts";     //テーブル名
 $ip     = getenv("REMOTE_ADDR"); //送信元 IP で初期化
 
 //取得したデータ (1)
-$essid= htmlspecialchars($_GET["essid"]);
+//$essid= htmlspecialchars($_GET["essid"]);
 $host = htmlspecialchars($_GET["hostname"]);
 $time = htmlspecialchars($_GET["time"]);
 //echo $essid;
