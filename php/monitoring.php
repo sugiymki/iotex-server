@@ -4,7 +4,7 @@
 */
 
 // 設定ファイル
-require_once("/home/sugiyama/iotex-server/conf/db_info.php");
+require_once("/home/user/iotex-server/conf/db_info.php");
 
 //変数初期化
 $table  = "monitoring";           //テーブル名
