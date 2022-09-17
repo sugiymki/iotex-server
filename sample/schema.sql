@@ -44,7 +44,8 @@ CREATE TABLE `monitoring` (
   `eco2` double DEFAULT NULL,
   `tvoc` double DEFAULT NULL,
   `winddir` double DEFAULT NULL,
-  `windvel` double DEFAULT NULL
+  `windvel` double DEFAULT NULL,
+  PRIMARY KEY (`hostname`, `time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
