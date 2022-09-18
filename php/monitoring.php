@@ -14,7 +14,11 @@ $ip     = getenv("REMOTE_ADDR"); //送信元 IP で初期化
 //取得したデータ (1)
 //$essid= htmlspecialchars($_GET["essid"]);
 $host = htmlspecialchars($_GET["hostname"]);
-$time = htmlspecialchars($_GET["time"]);
+if (htmlspecialchars($_GET["time"])){
+  $time = htmlspecialchars($_GET["time"]);
+}else{
+  $time = date("YmdHis");
+}
 //echo $essid;
 //echo $host;
 //echo $time;
